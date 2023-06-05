@@ -13,4 +13,10 @@ class SessionsController < ApplicationController
       render 'new'
     end
   end
+
+  def destroy
+    log_out
+    redirect_to root_url, status: :see_other
+    #rootに行く時はわかりやすく、root_urlにする
+  end
 end
