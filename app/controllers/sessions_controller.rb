@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       login user
+      remember user
       redirect_to user
     else
       flash.now[:danger] = "ユーザーのメールアドレスが見つかりませんでした"
@@ -15,7 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
+    log_out if logged_in?
     redirect_to root_url, status: :see_other
     #rootに行く時はわかりやすく、root_urlにする
   end
