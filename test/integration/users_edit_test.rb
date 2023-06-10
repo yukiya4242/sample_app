@@ -20,8 +20,8 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
 
   test "successful edit" do
-    login_as(@user)
     get edit_user_path(@user)
+    login_as(@user)
     assert_template 'users/edit'
     name = "Foo Bar"
     email = "foo@bar.com"
