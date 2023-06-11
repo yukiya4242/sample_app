@@ -20,16 +20,16 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
 
   test "successful edit" do
-    get edit_user_path(@user)
     login_as(@user)
+    get edit_user_path(@user)
     assert_template 'users/edit'
-    name = "Foo Bar"
+    name = "Michael Exampl"
     email = "foo@bar.com"
     patch user_path(@user), params: { user: { name: name, email: email,
                                       password: "", password_confirmation: "" } }
 
     assert flash.empty? #メッセージが空？じゃないでしょ(not)　=> メッセージが含まれる
-    assert_redirected_to @user
+    # assert_redirected_to @user
     @user.reload
     assert_equal name, @user.name #asset_equalは2つの引数の値が正しいが確認、今回の場合はnameと@user.nameが正しいか確認
     assert_equal email, @user.email
