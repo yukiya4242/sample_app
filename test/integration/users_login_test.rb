@@ -51,7 +51,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
       login_as(@user, remember_me: '1')
       # Cookieが削除されていることを検証してからログイン
       login_as(@user, remember_me: '0')
-      assert_not cookies[:remember_token].blank?
+      assert cookies[:remember_token].blank?
     end
 
 end
