@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         forwarding_url = session[:forwarding_url]
         reset_session
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        log_in user
+        login user
         redirect_to forwarding_url || user
       else
         message  = "Account not activated. "
